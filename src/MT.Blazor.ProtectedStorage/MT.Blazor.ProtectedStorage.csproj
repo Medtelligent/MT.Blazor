@@ -25,6 +25,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Include="..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Remove="package.json" />
 		<None Include="package.json" />
         <Content Remove="package-lock.json" />
