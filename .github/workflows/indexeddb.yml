@@ -1,0 +1,28 @@
+name: Package MT.Blazor.IndexedDB
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'src/MT.Blazor.IndexedDB/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'src/MT.Blazor.IndexedDB/**'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Package
+      run: dotnet pack -c Release -o . src/MT.Blazor.IndexedDB/MT.Blazor.IndexedDB.csproj
+    - name: Publish
+      run: dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate -n
