@@ -1,0 +1,5 @@
+# frontend dev directories
+node_modules
+package-lock.json
+.sass-cache
+.build-stamp

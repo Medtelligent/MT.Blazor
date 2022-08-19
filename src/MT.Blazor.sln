@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.Blazor.ConnectivityDetection", "MT.Blazor.ConnectivityDetection\MT.Blazor.ConnectivityDetection.csproj", "{6244165E-2D04-415C-BEA4-5743917226C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.Blazor.ProtectedStorage", "MT.Blazor.ProtectedStorage\MT.Blazor.ProtectedStorage.csproj", "{B0E32142-4B88-425D-A9F9-8C9B3D39C313}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT.Blazor.IndexedDB", "MT.Blazor.IndexedDB\MT.Blazor.IndexedDB.csproj", "{2628F437-D536-42BB-86E7-1ECFE62BAF61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B1CBCF5C-426A-4282-A2C1-79B8EF7ACC36}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6244165E-2D04-415C-BEA4-5743917226C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6244165E-2D04-415C-BEA4-5743917226C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6244165E-2D04-415C-BEA4-5743917226C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6244165E-2D04-415C-BEA4-5743917226C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0E32142-4B88-425D-A9F9-8C9B3D39C313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0E32142-4B88-425D-A9F9-8C9B3D39C313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0E32142-4B88-425D-A9F9-8C9B3D39C313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0E32142-4B88-425D-A9F9-8C9B3D39C313}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2628F437-D536-42BB-86E7-1ECFE62BAF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2628F437-D536-42BB-86E7-1ECFE62BAF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2628F437-D536-42BB-86E7-1ECFE62BAF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2628F437-D536-42BB-86E7-1ECFE62BAF61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

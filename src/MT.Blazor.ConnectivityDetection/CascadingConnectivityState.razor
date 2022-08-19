@@ -1,0 +1,38 @@
+﻿@implements IDisposable
+@inject IConnectivityStateProvider _connectivityStateProvider
+
+<CascadingValue TValue="ConnectivityState" Value="@_currentConnectivityState" ChildContent="@ChildContent" />
+
+@code {
+    private ConnectivityState _currentConnectivityState;
+    
+    /// <summary>
+    /// The content to which the connectivity state should be provided.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _currentConnectivityState = new ConnectivityState(ConnectivityState.ConnectivityStatus.Unknown);
+        
+        _connectivityStateProvider.ConnectivityStateChanged += OnConnectivityStateChanged;
+
+        await _connectivityStateProvider
+            .StartConnectivityDetectionAsync();
+    }
+
+    private void OnConnectivityStateChanged(ConnectivityState newConnState)
+    {
+        _ = InvokeAsync(() =>
+        {
+            _currentConnectivityState = newConnState;
+            StateHasChanged();
+        });
+    }
+
+    void IDisposable.Dispose()
+    {
+        _connectivityStateProvider.ConnectivityStateChanged -= OnConnectivityStateChanged;
+    }
+}

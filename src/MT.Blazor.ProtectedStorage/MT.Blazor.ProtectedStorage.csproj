@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Company>Medtelligent</Company>
+		<Authors>Huzaifa Tapal</Authors>
+		<Description>Blazor component library for seamless encryption of values in browser storage</Description>
+		<Copyright>Copyright © $(Authors) 2020-$([System.DateTime]::Now.Year)</Copyright>
+		<PackageVersion>1.0.0</PackageVersion>
+		<PackageProjectUrl>https://github.com/Medtelligent/MT.MudBlazor</PackageProjectUrl>
+		<PackageLicenseUrl>LICENSE</PackageLicenseUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/Medtelligent/MT.MudBlazor</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>Blazor, Components, Blazor Components, Blazor Library</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Remove="package.json" />
+		<None Include="package.json" />
+        <Content Remove="package-lock.json" />
+        <None Include="package-lock.json" />
+        <None Update="README.md">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Remove="Scripts\**" />
+		<None Include="Scripts\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<WebpackInputs Include="Scripts\**\*.js" Exclude="wwwroot\**;node_modules\**; **\*.d.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\" />
+	</ItemGroup>
+
+	<Target Name="NpmInstall" Inputs="package.json" Outputs="node_modules/.install-stamp">
+		<Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+		<Exec Command="npm install" />
+
+		<!-- Write the stamp file, so incremental builds work -->
+		<Touch Files="node_modules/.install-stamp" AlwaysCreate="true" />
+	</Target>
+
+	<Target Name="WebpackRun" AfterTargets="ResolveReferences" Inputs="@(WebpackInputs)" Outputs="Scripts/.build-stamp" DependsOnTargets="NpmInstall">
+		<Message Importance="high" Text="Running webpack with 'npm'. This may take several minutes..." />
+		<Exec Command="npm run build:debug" Condition="'$(Configuration)' == 'Debug'" />
+		<Exec Command="npm run build:production" Condition="'$(Configuration)' != 'Debug'" />
+
+		<!-- Write the stamp file, so incremental builds work -->
+		<Touch Files="Scripts/.build-stamp" AlwaysCreate="true" />
+	</Target>
+</Project>
