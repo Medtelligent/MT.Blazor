@@ -1,4 +1,4 @@
-name: .NET
+name: Package MT.Blazor.ConnectivityDetection
 
 on:
   workflow_dispatch:
