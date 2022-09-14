@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Lambda2Js;
@@ -147,14 +148,14 @@ public class CustomJavascriptConversionExtension : JavascriptConversionExtension
 								if (methodCall.Arguments[0].IsFieldExpression())
 								{
 									var value = GetFieldExpressionValue(methodCall.Arguments[0]);
-									writer.Write(value ?? "null");
+									writer.Write($"{value ?? "[]"}.includes");
 								}
 								else 
 								{
-									context.Visitor.Visit(methodCall.Arguments[0]);	
+									writer.Write("(");
+									context.Visitor.Visit(methodCall.Arguments[0]);
+									writer.Write("||[]).includes");
 								}
-								
-								writer.Write(".includes");
 							}
 
 							writer.Write('(');
@@ -201,14 +202,14 @@ public class CustomJavascriptConversionExtension : JavascriptConversionExtension
 								if (methodCall.Arguments[0].IsFieldExpression())
 								{
 									var value = GetFieldExpressionValue(methodCall.Arguments[0]);
-									writer.Write(value ?? "null");
+									writer.Write($"{value ?? "[]"}.indexOf");
 								}
 								else
 								{
+									writer.Write("(");
 									context.Visitor.Visit(methodCall.Arguments[0]);
+									writer.Write("||[]).indexOf");
 								}
-								
-								writer.Write(".indexOf");
 							}
 
 							writer.Write('(');
@@ -230,6 +231,52 @@ public class CustomJavascriptConversionExtension : JavascriptConversionExtension
 
 						return;
 					}
+			}
+		}
+		else if ((methodCall.Method.DeclaringType?.IsGenericType ?? false) && methodCall.Method.DeclaringType.GetGenericTypeDefinition() == typeof(List<>))
+		{
+			switch (methodCall.Method.Name)
+			{
+				case "Contains":
+				{
+					context.PreventDefault();
+					var writer = context.GetWriter();
+					using (writer.Operation(JavascriptOperationTypes.Call))
+					{
+						using (writer.Operation(JavascriptOperationTypes.IndexerProperty))
+						{
+							var pars = methodCall.Method.GetParameters();
+							if (pars.Length != 1)
+							{
+								throw new NotSupportedException("The `List.Contains` method must have 1 parameters.");
+							}
+
+							writer.Write("(");
+								
+							context.Visitor.Visit(methodCall.Object);
+
+							writer.Write("||[]).includes");
+						}
+
+						writer.Write('(');
+
+						// separator
+						using (writer.Operation(0))
+							if (methodCall.Arguments[0].IsFieldExpression())
+							{
+								var value = GetFieldExpressionValue(methodCall.Arguments[1]);
+								writer.Write(value ?? "null");
+							}
+							else
+							{
+								context.Visitor.Visit(methodCall.Arguments[0]);
+							}
+
+						writer.Write(')');
+					}
+
+					return;
+				}
 			}
 		}
 	}
