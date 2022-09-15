@@ -6,7 +6,7 @@
         <Authors>Huzaifa Tapal</Authors>
         <Description>Blazor component library for EF like interface with indexedDB storage</Description>
         <Copyright>Copyright © $(Authors) 2020-$([System.DateTime]::Now.Year)</Copyright>
-        <PackageVersion>0.0.0</PackageVersion>
+        <PackageVersion>0.0.1</PackageVersion>
         <PackageProjectUrl>https://github.com/Medtelligent/MT.MudBlazor</PackageProjectUrl>
         <PackageLicenseUrl>LICENSE</PackageLicenseUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
