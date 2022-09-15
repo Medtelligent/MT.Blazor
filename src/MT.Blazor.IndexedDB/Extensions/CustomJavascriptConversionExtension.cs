@@ -306,6 +306,11 @@ public class CustomJavascriptConversionExtension : JavascriptConversionExtension
 			return $"[{string.Join(",", ((bool[])value).Select(v => v ? "true" : "false"))}]";
 		}
 
+		if (valueType?.IsEnum ?? false)
+		{
+			return (int) value;
+		}
+
 		switch (value)
 		{
 			case float[] val:
@@ -320,7 +325,7 @@ public class CustomJavascriptConversionExtension : JavascriptConversionExtension
 				return $"[{string.Join(',', val)}]";
 		}
 		
-		if (value is null || !(valueType.IsValueType || valueType == typeof(string)))
+		if (valueType is null || value is null || !(valueType.IsValueType || valueType == typeof(string)))
 		{
 			return value;
 		}
