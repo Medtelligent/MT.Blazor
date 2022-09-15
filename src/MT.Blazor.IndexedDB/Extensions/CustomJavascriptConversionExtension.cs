@@ -264,7 +264,7 @@ public class CustomJavascriptConversionExtension : JavascriptConversionExtension
 						using (writer.Operation(0))
 							if (methodCall.Arguments[0].IsFieldExpression())
 							{
-								var value = GetFieldExpressionValue(methodCall.Arguments[1]);
+								var value = GetFieldExpressionValue(methodCall.Arguments[0]);
 								writer.Write(value ?? "null");
 							}
 							else
