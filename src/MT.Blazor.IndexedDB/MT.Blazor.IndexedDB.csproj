@@ -10,7 +10,7 @@
         <PackageProjectUrl>https://github.com/Medtelligent/MT.MudBlazor</PackageProjectUrl>
         <PackageLicenseUrl>LICENSE</PackageLicenseUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <RepositoryUrl>https://github.com/Medtelligent/MT.MudBlazor</RepositoryUrl>
+        <RepositoryUrl>https://github.com/Medtelligent/MT.Blazor</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>Blazor, Components, Blazor Components, Blazor Library</PackageTags>
     </PropertyGroup>
